@@ -31,19 +31,24 @@ public class Rechnung {
         System.out.println(brutto);
     }
 
-    void legeRabattFest(double neuerRabatt) {
+    void legeRabattFest(final double neuerRabatt) {
+        if ((rabatt > 0) & (rabatt < 0.5)) {
+            rabatt = neuerRabatt;
+        }
 
-        // TODO
+        // TODO Fehlerausgabe
     }
 
     void legeMehwertsteuerFest(double neueMwSt) {
-
-        // TODO
+        mehrwertsteuer = neueMwSt;
     }
 
     void legePostenHinzu(int anzahl, double einzelpreis) {
+        betrag += anzahl + einzelpreis;
+    }
 
-        // TODO
+    double liefereRabatt() {
+        return rabatt;
     }
 }
 
