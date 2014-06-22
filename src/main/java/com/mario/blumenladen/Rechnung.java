@@ -21,14 +21,14 @@ public class Rechnung {
         double brutto = netto * (1 + mehrwertsteuer);
 
         System.out.println("An:");
-        System.out.println(rechnungsempfänger.name);
-        System.out.println(rechnungsempfänger.anschrift);
+        System.out.println(this.rechnungsempfänger.getName());
+        System.out.println(this.rechnungsempfänger.getAnschrift());
         System.out.println("Netto : ");
-        System.out.println(netto);
+        System.out.println(berechneNettopreis());
         System.out.println("MwSt: ");
-        System.out.println(mehrwertsteuer);
+        System.out.println(berechneMehrwertsteuer());
         System.out.println("Brutto: ");
-        System.out.println(brutto);
+        System.out.println(berechneBruttopreis());
     }
 
     void legeRabattFest(final double neuerRabatt) {
@@ -49,6 +49,18 @@ public class Rechnung {
 
     double liefereRabatt() {
         return rabatt;
+    }
+
+    double berechneNettopreis() {
+        return betrag * (1 - rabatt);
+    }
+
+    double berechneBruttopreis() {
+        return betrag * (1 - rabatt) * (1 + mehrwertsteuer);
+    }
+
+    double berechneMehrwertsteuer() {
+        return betrag * (1 - rabatt) * (mehrwertsteuer);
     }
 }
 
