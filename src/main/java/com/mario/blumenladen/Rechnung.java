@@ -16,6 +16,22 @@ public class Rechnung {
     double rabatt;
     Kunde  rechnungsempfänger;
 
+    public double getMehrwertsteuer() {
+        return mehrwertsteuer;
+    }
+
+    public Kunde getRechnungsempfänger() {
+        return rechnungsempfänger;
+    }
+
+    public double getRabatt() {
+        return rabatt;
+    }
+
+    public double getBetrag() {
+        return betrag;
+    }
+
     void gebeAus() {
         double netto  = betrag * (1 - rabatt);
         double brutto = netto * (1 + mehrwertsteuer);
@@ -47,20 +63,16 @@ public class Rechnung {
         betrag += anzahl + einzelpreis;
     }
 
-    double liefereRabatt() {
-        return rabatt;
-    }
-
     double berechneNettopreis() {
-        return betrag * (1 - rabatt);
+        return getBetrag() * (1 - getRabatt());
     }
 
     double berechneBruttopreis() {
-        return betrag * (1 - rabatt) * (1 + mehrwertsteuer);
+        return berechneNettopreis() * (1 + getMehrwertsteuer());
     }
 
     double berechneMehrwertsteuer() {
-        return betrag * (1 - rabatt) * (mehrwertsteuer);
+        return getBetrag() * (1 - getRabatt()) * (getMehrwertsteuer());
     }
 }
 
