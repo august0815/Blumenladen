@@ -48,7 +48,10 @@
 <UML:NavigableEnd xmi.id="DCE.1757CA29-4018-EC7F-1718-5E3F629EC1BA" visibility="package" type="DCE.379492D1-7BD6-157C-7B07-26F9A36DB19C" association="DCE.0CDCE07A-4024-DFC4-EB04-E06B730ADA86" name="artikel"/></UML:Association.end></UML:Aggregation>
 <UML:Aggregation xmi.id="DCE.2438827D-5EAF-F42B-1577-BE76BF7AD1E8" owner="DCE.2F4BA371-DD0D-F523-33F2-DB5A07BF2C71" aggregateEnd="DCE.6C8F3C40-7523-5777-2E09-9EB543F7AE2D" partEnd="DCE.6BEBB01E-018A-BCB3-9260-3B7D0B5D0186"><UML:Association.end>
 <UML:AssociationEnd xmi.id="DCE.6C8F3C40-7523-5777-2E09-9EB543F7AE2D" visibility="private" type="DCE.E6DE1563-DEF9-3744-DB3A-DFB2D627702B" association="DCE.2438827D-5EAF-F42B-1577-BE76BF7AD1E8"/>
-<UML:NavigableEnd xmi.id="DCE.6BEBB01E-018A-BCB3-9260-3B7D0B5D0186" visibility="package" type="DCE.8A58C0BC-19EF-1904-2577-FFF6FD6F8F1B" association="DCE.2438827D-5EAF-F42B-1577-BE76BF7AD1E8" name="rechnungsempfänger"/></UML:Association.end></UML:Aggregation></UML:Element.ownedElement></UML:Package></UML:Element.ownedElement></UML:Package></UML:Element.ownedElement></UML:Package>
+<UML:NavigableEnd xmi.id="DCE.6BEBB01E-018A-BCB3-9260-3B7D0B5D0186" visibility="package" type="DCE.8A58C0BC-19EF-1904-2577-FFF6FD6F8F1B" association="DCE.2438827D-5EAF-F42B-1577-BE76BF7AD1E8" name="rechnungsempfänger"/></UML:Association.end></UML:Aggregation>
+</UML:Element.ownedElement></UML:Package>
+</UML:Element.ownedElement></UML:Package>
+</UML:Element.ownedElement></UML:Package>
 <UML:DataType xmi.id="DCE.93ADA5F1-59CE-B65F-1165-B05E7E5F03DE" name="void" owner="DCE.1B1DE44A-FDDF-4F65-9366-381DE04A50A4"/>
 <UML:DataType xmi.id="DCE.D92EA537-07F8-BEB2-5E34-40BA9402D70A" name="String" owner="DCE.1B1DE44A-FDDF-4F65-9366-381DE04A50A4"/>
 <UML:DataType xmi.id="DCE.E8441988-A02B-86AE-A286-1D0D26E01195" name="int" owner="DCE.1B1DE44A-FDDF-4F65-9366-381DE04A50A4"/>
