@@ -11,11 +11,23 @@ package com.mario.blumenladen;
  *
  *
  * @version        Enter version here..., 14/06/22
- * @author         Enter your name here...    
+ * @author         Enter your name here...
  */
 public class Kunde {
     String name;
     String anschrift;
+
+    /**
+     * Constructs ...
+     *
+     *
+     * @param name
+     * @param anschrift
+     */
+    public Kunde(String name, String anschrift) {
+        this.name      = name;
+        this.anschrift = anschrift;
+    }
 
     void setName(final String neuerName) {
         this.name = neuerName;

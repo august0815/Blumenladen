@@ -12,11 +12,7 @@ package com.mario.blumenladen;
  */
 public class Main {
     public static void main(String[] args) {
-        Kunde k = new Kunde();
-
-        k.name      = "Anton Maier";
-        k.anschrift = "TEERTAL 8, \n9999 Nirgendwo";
-
+        Kunde    k = new Kunde("Anton Meier", "TEERTAL 8, \n9999 Nirgendwo");
         Rechnung r = new Rechnung(1);
 
         r.rechnungsempfänger = k;

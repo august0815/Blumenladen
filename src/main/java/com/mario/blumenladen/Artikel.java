@@ -18,8 +18,13 @@ public class Artikel {
     /**
      * Constructs ...
      *
+     *
+     * @param artikelnr
+     * @param preis
      */
-    public Artikel() {}
+    public Artikel(long artikelnr, double preis) {
+        this(artikelnr, "", preis);
+    }
 
     /**
      * Constructs ...
