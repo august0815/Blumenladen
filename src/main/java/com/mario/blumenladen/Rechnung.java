@@ -11,32 +11,34 @@ package com.mario.blumenladen;
  * @author mario
  */
 public class Rechnung {
-    double    betrag = 0;
-    double    mehrwertsteuer;
-    double    rabatt;
-    Kunde     rechnungsempfänger;
-    final int rechnungsnummer;
+    private static int naechsteRechnungsnummer = 1000;
+    double             betrag                  = 0;
+    double             mehrwertsteuer;
+    double             rabatt;
+    Kunde              rechnungsempfänger;
+    final int          rechnungsnummer;
 
     /**
      * Constructs ...
      *
      *
-     * @param rechnungsnummer
+     *
      */
-    public Rechnung(final int rechnungsnummer) {
-        this(rechnungsnummer, 0.19);
+    public Rechnung() {
+        this(0.19);
     }
 
     /**
      * Constructs ...
      *
      *
-     * @param rechnungsnummer
+     *
      * @param mwst
      */
-    public Rechnung(final int rechnungsnummer, final double mwst) {
-        this.rechnungsnummer = 0;
-        this.mehrwertsteuer  = mwst;
+    public Rechnung(double mwst) {
+        this.rechnungsnummer = Rechnung.naechsteRechnungsnummer;
+        Rechnung.naechsteRechnungsnummer++;
+        this.mehrwertsteuer = mwst;
     }
 
     public int getRechnungsnummer() {
