@@ -11,10 +11,37 @@ package com.mario.blumenladen;
  * @author mario
  */
 public class Rechnung {
-    double betrag = 0;
-    double mehrwertsteuer;
-    double rabatt;
-    Kunde  rechnungsempfänger;
+    double    betrag = 0;
+    double    mehrwertsteuer;
+    double    rabatt;
+    Kunde     rechnungsempfänger;
+    final int rechnungsnummer;
+
+    /**
+     * Constructs ...
+     *
+     *
+     * @param rechnungsnummer
+     */
+    public Rechnung(final int rechnungsnummer) {
+        this(rechnungsnummer, 0.19);
+    }
+
+    /**
+     * Constructs ...
+     *
+     *
+     * @param rechnungsnummer
+     * @param mwst
+     */
+    public Rechnung(final int rechnungsnummer, final double mwst) {
+        this.rechnungsnummer = 0;
+        this.mehrwertsteuer  = mwst;
+    }
+
+    public int getRechnungsnummer() {
+        return rechnungsnummer;
+    }
 
     public double getMehrwertsteuer() {
         return mehrwertsteuer;
@@ -39,11 +66,13 @@ public class Rechnung {
         System.out.println("An:");
         System.out.println(this.rechnungsempfänger.getName());
         System.out.println(this.rechnungsempfänger.getAnschrift());
-        System.out.println("Netto : ");
+        System.out.print("Rechnungsnummer: ");
+        System.out.println(getRechnungsnummer());
+        System.out.print("Netto : ");
         System.out.println(berechneNettopreis());
-        System.out.println("MwSt: ");
+        System.out.print("MwSt: ");
         System.out.println(berechneMehrwertsteuer());
-        System.out.println("Brutto: ");
+        System.out.print("Brutto: ");
         System.out.println(berechneBruttopreis());
     }
 
@@ -59,8 +88,8 @@ public class Rechnung {
         mehrwertsteuer = neueMwSt;
     }
 
-    void legePostenHinzu(int anzahl, double einzelpreis) {
-        betrag += anzahl + einzelpreis;
+    void fuegePostenHinzu(Rechnungsposten posten) {
+        betrag += posten.berechneGesamtbetrag();
     }
 
     double berechneNettopreis() {
@@ -68,11 +97,15 @@ public class Rechnung {
     }
 
     double berechneBruttopreis() {
-        return berechneNettopreis() * (1 + getMehrwertsteuer());
+        return berechneNettopreis() + berechneMehrwertsteuer();
     }
 
     double berechneMehrwertsteuer() {
         return getBetrag() * (1 - getRabatt()) * (getMehrwertsteuer());
+    }
+
+    void aendereRechnungsempfaengetr(Kunde neuerEmpfaenger) {
+        this.rechnungsempfänger = neuerEmpfaenger;
     }
 }
 
