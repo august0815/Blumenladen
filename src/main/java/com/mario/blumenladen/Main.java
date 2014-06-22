@@ -17,7 +17,7 @@ public class Main {
         k.name      = "Anton Maier";
         k.anschrift = "TEERTAL 8, \n9999 Nirgendwo";
 
-        Rechnung r = new Rechnung();
+        Rechnung r = new Rechnung(1);
 
         r.rechnungsempfänger = k;
         r.betrag             = 5000;
