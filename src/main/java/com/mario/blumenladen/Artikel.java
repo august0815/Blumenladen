@@ -40,30 +40,58 @@ public class Artikel {
         this.preis        = preis;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getArtikelnr() {
         return artikelnr;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getBeschreibung() {
         return beschreibung;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getPreis() {
         return preis;
     }
 
+    /**
+     *
+     * @param artikelnr
+     */
     public void setArtikelnr(long artikelnr) {
         this.artikelnr = artikelnr;
     }
 
+    /**
+     *
+     * @param beschreibung
+     */
     public void setBeschreibung(String beschreibung) {
         this.beschreibung = beschreibung;
     }
 
+    /**
+     *
+     * @param preis
+     */
     public void setPreis(double preis) {
         this.preis = preis;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return super.toString();    // To change body of generated methods, choose Tools | Templates.

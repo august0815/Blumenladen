@@ -32,18 +32,34 @@ public class Rechnungsposten {
         this.artikel = artikel;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getAnzahl() {
         return anzahl;
     }
 
+    /**
+     *
+     * @return
+     */
     public Artikel getArtikel() {
         return artikel;
     }
 
+    /**
+     *
+     * @param anzahl
+     */
     public void setAnzahl(int anzahl) {
         this.anzahl = anzahl;
     }
 
+    /**
+     *
+     * @param artikel
+     */
     public void setArtikel(Artikel artikel) {
         this.artikel = artikel;
     }

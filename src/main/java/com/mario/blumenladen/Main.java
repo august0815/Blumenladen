@@ -11,6 +11,11 @@ package com.mario.blumenladen;
  * @author mario
  */
 public class Main {
+
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Kunde    k = new Kunde("Anton Meier", "TEERTAL 8, \n9999 Nirgendwo");
         Rechnung r = new Rechnung(1);

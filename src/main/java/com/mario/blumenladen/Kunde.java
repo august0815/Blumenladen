@@ -33,14 +33,26 @@ public class Kunde {
         this.name = neuerName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAnschrift() {
         return anschrift;
     }
 
+    /**
+     *
+     * @param anschrift
+     */
     public void setAnschrift(String anschrift) {
         this.anschrift = anschrift;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
