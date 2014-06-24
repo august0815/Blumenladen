@@ -17,13 +17,21 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        Kunde    k = new Kunde("Anton Meier", "TEERTAL 8, \n9999 Nirgendwo");
-        Rechnung r = new Rechnung(1);
+        Kunde             k = new Kunde("Anton Meier", "TEERTAL 8, \n9999 Nirgendwo");
+        Rechnung          r = new Rechnung(k);
+        Artikel           a, b, c;
+        Rechnungsposten[] rp = new Rechnungsposten[10];
 
+        a = new Artikel(1001, "Blume", 5, 0.19);
+        b = new Artikel(1002, "Topf", 10, 0.19);
+        c = new Artikel(1003, "Erde", 15, 0.19);
+        r.fuegePostenHinzu(new Rechnungsposten(10, a));
+        r.fuegePostenHinzu(new Rechnungsposten(20, b));
+        r.fuegePostenHinzu(new Rechnungsposten(30, c));
         r.rechnungsempfänger = k;
-        r.betrag             = 5000;
         r.rabatt             = 0.10;
-        r.mehrwertsteuer     = 0.19;
+
+        // r.mehrwertsteuer     = 0.19;
         r.gebeAus();
     }
 }

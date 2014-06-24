@@ -14,6 +14,7 @@ public class Artikel {
     long   artikelnr;
     String beschreibung;
     double preis;
+    double mehrwertsteuer;
 
     /**
      * Constructs ...
@@ -21,9 +22,10 @@ public class Artikel {
      *
      * @param artikelnr
      * @param preis
+     * @param mwst
      */
-    public Artikel(long artikelnr, double preis) {
-        this(artikelnr, "", preis);
+    public Artikel(long artikelnr, double preis, double mwst) {
+        this(artikelnr, "", preis, mwst);
     }
 
     /**
@@ -33,11 +35,13 @@ public class Artikel {
      * @param artikelnr
      * @param beschreibung
      * @param preis
+     * @param mwst
      */
-    public Artikel(long artikelnr, String beschreibung, double preis) {
-        this.artikelnr    = artikelnr;
-        this.beschreibung = beschreibung;
-        this.preis        = preis;
+    public Artikel(long artikelnr, String beschreibung, double preis, double mwst) {
+        this.artikelnr      = artikelnr;
+        this.beschreibung   = beschreibung;
+        this.preis          = preis;
+        this.mehrwertsteuer = mwst;
     }
 
     /**
@@ -86,6 +90,10 @@ public class Artikel {
      */
     public void setPreis(double preis) {
         this.preis = preis;
+    }
+
+    public double getMehrwertsteuer() {
+        return mehrwertsteuer;
     }
 
     /**

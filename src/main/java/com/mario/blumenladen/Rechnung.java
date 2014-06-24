@@ -11,10 +11,11 @@ package com.mario.blumenladen;
  * @author mario
  */
 public class Rechnung {
+    final static int    Max_Posten                  = 100;
     private static int  naechsteRechnungsnummer     = 1000;
     static final double STANDART_MEHRWERTSTEUERSATZ = 0.19;
-    double              betrag                      = 0;
-    double              mehrwertsteuer;
+    Rechnungsposten[]   posten                      = new Rechnungsposten[Rechnung.Max_Posten];
+    int                 postenAnzahl                = 0;
     double              rabatt;
     Kunde               rechnungsempfänger;
     final int           rechnungsnummer;
@@ -23,22 +24,11 @@ public class Rechnung {
      * Constructs ...
      *
      *
-     *
+     * @param empf
      */
-    public Rechnung() {
-        this(STANDART_MEHRWERTSTEUERSATZ);
-    }
-
-    /**
-     * Constructs ...
-     *
-     *
-     *
-     * @param mwst
-     */
-    public Rechnung(double mwst) {
-        this.rechnungsnummer = Rechnung.berechneNaechsteRechnungsnummer();
-        this.mehrwertsteuer  = mwst;
+    public Rechnung(Kunde empf) {
+        this.rechnungsempfänger = empf;
+        this.rechnungsnummer    = Rechnung.berechneNaechsteRechnungsnummer();
     }
 
     static int berechneNaechsteRechnungsnummer() {
@@ -57,16 +47,12 @@ public class Rechnung {
      *
      * @return
      */
-    public double getMehrwertsteuer() {
-        return mehrwertsteuer;
-    }
-
-    /**
-     *
-     * @return
-     */
     public Kunde getRechnungsempfänger() {
         return rechnungsempfänger;
+    }
+
+    public void setRechnungsempfänger(Kunde rechnungsempfänger) {
+        this.rechnungsempfänger = rechnungsempfänger;
     }
 
     /**
@@ -77,18 +63,7 @@ public class Rechnung {
         return rabatt;
     }
 
-    /**
-     *
-     * @return
-     */
-    public double getBetrag() {
-        return betrag;
-    }
-
     void gebeAus() {
-        double netto  = betrag * (1 - rabatt);
-        double brutto = netto * (1 + mehrwertsteuer);
-
         System.out.println("An:");
         System.out.println(this.rechnungsempfänger.getName());
         System.out.println(this.rechnungsempfänger.getAnschrift());
@@ -110,16 +85,27 @@ public class Rechnung {
         // TODO Fehlerausgabe
     }
 
-    void legeMehwertsteuerFest(double neueMwSt) {
-        mehrwertsteuer = neueMwSt;
-    }
+    void fuegePostenHinzu(final Rechnungsposten posten) {
+        if (postenAnzahl >= Rechnung.Max_Posten) {
+            System.out.print("Zuviele Posten ");
 
-    void fuegePostenHinzu(Rechnungsposten posten) {
-        betrag += posten.berechneGesamtbetrag();
+            return;
+        }
+
+        this.posten[postenAnzahl] = posten;
+        this.postenAnzahl++;
     }
 
     double berechneNettopreis() {
-        return getBetrag() * (1 - getRabatt());
+        double summe = 0;
+
+        for (int i = 0; i < this.postenAnzahl; i++) {
+            Rechnungsposten rp = this.posten[i];
+
+            summe += rp.berechneGesamtbetrag();
+        }
+
+        return summe * (1 - this.getRabatt());
     }
 
     double berechneBruttopreis() {
@@ -127,7 +113,15 @@ public class Rechnung {
     }
 
     double berechneMehrwertsteuer() {
-        return getBetrag() * (1 - getRabatt()) * (getMehrwertsteuer());
+        double summe = 0;
+
+        for (int i = 0; i < this.postenAnzahl; i++) {
+            Rechnungsposten rp = this.posten[i];
+
+            summe += rp.berechneGesamtbetrag() * rp.getArtikel().getMehrwertsteuer();
+        }
+
+        return summe * (1 - this.getRabatt());
     }
 
     void aendereRechnungsempfaengetr(Kunde neuerEmpfaenger) {
