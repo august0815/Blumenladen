@@ -11,20 +11,24 @@ package com.mario.blumenladen;
 import com.mario.blumenladen.kunde.Kunde;
 import com.mario.blumenladen.kunde.PremiumKunde;
 
+//~--- JDK imports ------------------------------------------------------------
+
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
  * @author mario
  */
 public class Rechnung {
-    final static int    Max_Posten                  = 100;
-    private static int  naechsteRechnungsnummer     = 1000;
-    static final double STANDART_MEHRWERTSTEUERSATZ = 0.19;
-    Rechnungsposten[]   posten                      = new Rechnungsposten[Rechnung.Max_Posten];
-    int                 postenAnzahl                = 0;
-    private double      betrag                      = 200;
-    double              rabatt;
-    Kunde               rechnungsempfänger;
-    final int           rechnungsnummer;
+    private static int    naechsteRechnungsnummer     = 1000;
+    static final double   STANDART_MEHRWERTSTEUERSATZ = 0.19;
+    List<Rechnungsposten> posten                      = new LinkedList<Rechnungsposten>();
+    int                   postenAnzahl                = 0;
+    private double        betrag                      = 200;
+    double                rabatt;
+    Kunde                 rechnungsempfänger;
+    final int             rechnungsnummer;
 
     /**
      * Constructs ...
@@ -76,6 +80,14 @@ public class Rechnung {
         // System.out.println(this.rechnungsempfänger.adresse);
         System.out.print("Rechnungsnummer: ");
         System.out.println(getRechnungsnummer());
+        System.out.println("");
+        System.out.println("Artikel : ");
+
+        for (Rechnungsposten rp : posten) {
+            System.out.println(rp.anzahl + " x Nr " + rp.getArtikel().getArtikelnr() + "   "
+                               + rp.getArtikel().getBeschreibung());
+        }
+
         System.out.print("Netto : ");
         System.out.println(berechneNettopreis());
         System.out.print("MwSt: ");
@@ -94,23 +106,14 @@ public class Rechnung {
         // TODO Fehlerausgabe
     }
 
-    void fuegePostenHinzu(final Rechnungsposten posten) {
-        if (postenAnzahl >= Rechnung.Max_Posten) {
-            System.out.print("Zuviele Posten ");
-
-            return;
-        }
-
-        this.posten[postenAnzahl] = posten;
-        this.postenAnzahl++;
+    void fuegePostenHinzu(final Rechnungsposten rp) {
+        this.posten.add(rp);
     }
 
     double berechneNettopreis() {
         double summe = 0;
 
-        for (int i = 0; i < this.postenAnzahl; i++) {
-            Rechnungsposten rp = this.posten[i];
-
+        for (Rechnungsposten rp : posten) {
             summe += rp.berechneGesamtbetrag();
         }
 
@@ -124,9 +127,7 @@ public class Rechnung {
     double berechneMehrwertsteuer() {
         double summe = 0;
 
-        for (int i = 0; i < this.postenAnzahl; i++) {
-            Rechnungsposten rp = this.posten[i];
-
+        for (Rechnungsposten rp : posten) {
             summe += rp.berechneGesamtbetrag() * rp.getArtikel().getMehrwertsteuer();
         }
 
@@ -153,6 +154,10 @@ public class Rechnung {
                 return 0;
             }
         }
+    }
+
+    public int bestimmeBetragInCent() {
+        return 0;
     }
 }
 
