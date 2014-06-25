@@ -67,6 +67,10 @@ public class Artikel {
     }
 
     public void setMehrwertsteuer(double mehrwertsteuer) {
+        if (mehrwertsteuer < 0) {
+            throw new IllegalArgumentException("MwST<0 " + mehrwertsteuer);
+        }
+
         this.mehrwertsteuer = mehrwertsteuer;
     }
 

@@ -6,6 +6,8 @@
  */
 package com.mario.blumenladen;
 
+//~--- non-JDK imports --------------------------------------------------------
+
 import com.mario.blumenladen.kunde.Kunde;
 import com.mario.blumenladen.kunde.PremiumKunde;
 
@@ -19,17 +21,18 @@ public class Rechnung {
     static final double STANDART_MEHRWERTSTEUERSATZ = 0.19;
     Rechnungsposten[]   posten                      = new Rechnungsposten[Rechnung.Max_Posten];
     int                 postenAnzahl                = 0;
+    private double      betrag                      = 200;
     double              rabatt;
-    PremiumKunde        rechnungsempfänger;
+    Kunde               rechnungsempfänger;
     final int           rechnungsnummer;
 
     /**
      * Constructs ...
+     * erzeugt einen neue Rechnung fur den Kunden
      *
-     *
-     * @param empf
+     * @param empf ist der Rechnungsempfänger
      */
-    public Rechnung(PremiumKunde empf) {
+    public Rechnung(Kunde empf) {
         this.rechnungsempfänger = empf;
         this.rechnungsnummer    = Rechnung.berechneNaechsteRechnungsnummer();
     }
@@ -69,7 +72,8 @@ public class Rechnung {
     void gebeAus() {
         System.out.println("An:");
         System.out.println(this.rechnungsempfänger.getName());
-        System.out.println(this.rechnungsempfänger.adresse);
+
+        // System.out.println(this.rechnungsempfänger.adresse);
         System.out.print("Rechnungsnummer: ");
         System.out.println(getRechnungsnummer());
         System.out.print("Netto : ");
@@ -80,10 +84,12 @@ public class Rechnung {
         System.out.println(berechneBruttopreis());
     }
 
-    void legeRabattFest(final double neuerRabatt) {
-        if ((rabatt > 0) & (rabatt < 0.5)) {
-            rabatt = neuerRabatt;
+    void setRabatt(final double neuerRabatt) throws UngueltigeRabattAusnahme {
+        if ((neuerRabatt < 0) || (neuerRabatt > 1)) {
+            throw new UngueltigeRabattAusnahme(neuerRabatt);
         }
+
+        rabatt = neuerRabatt;
 
         // TODO Fehlerausgabe
     }
@@ -129,6 +135,24 @@ public class Rechnung {
 
     void aendereRechnungsempfaengetr(PremiumKunde neuerEmpfaenger) {
         this.rechnungsempfänger = neuerEmpfaenger;
+    }
+
+    public void legeBetragFest(int i) {}
+
+    public int bestimmeRabatt() {
+        if (rechnungsempfänger.getIstPremiumkunde()) {
+            if (betrag >= 200) {
+                return 10;
+            } else {
+                return 5;
+            }
+        } else {
+            if (betrag >= 100) {
+                return 5;
+            } else {
+                return 0;
+            }
+        }
     }
 }
 

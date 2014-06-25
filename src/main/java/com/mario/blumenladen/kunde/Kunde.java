@@ -18,15 +18,24 @@ import com.mario.blumenladen.Person;
  * @author         Enter your name here...
  */
 public class Kunde extends Person {
+    boolean istPremiumkunde;
 
     /**
      * Constructs ...
+     * erzeugt einen neuen Kunden mit gegebenem Namen
      *
-     *
-     * @param name
+     * @param name des Kunden
      */
     public Kunde(String name) {
         super(name);
+    }
+
+    public boolean getIstPremiumkunde() {
+        return istPremiumkunde;
+    }
+
+    public void setIstPremiumkunde(boolean istPremiumkunde) {
+        this.istPremiumkunde = istPremiumkunde;
     }
 }
 

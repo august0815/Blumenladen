@@ -18,12 +18,13 @@ public class PremiumKunde extends Kunde {
 
     /**
      * Constructs ...
-     *
+     * erzeugt einen neuen PremiumKunden mit gegebenem Namen
      *
      * @param name
      */
     public PremiumKunde(String name) {
         super(name);
+        setIstPremiumkunde(true);
     }
 }
 
