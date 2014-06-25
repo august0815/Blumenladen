@@ -6,6 +6,9 @@
  */
 package com.mario.blumenladen;
 
+import com.mario.blumenladen.kunde.Kunde;
+import com.mario.blumenladen.kunde.PremiumKunde;
+
 /**
  *
  * @author mario
@@ -17,7 +20,7 @@ public class Rechnung {
     Rechnungsposten[]   posten                      = new Rechnungsposten[Rechnung.Max_Posten];
     int                 postenAnzahl                = 0;
     double              rabatt;
-    Kunde               rechnungsempfänger;
+    PremiumKunde        rechnungsempfänger;
     final int           rechnungsnummer;
 
     /**
@@ -26,7 +29,7 @@ public class Rechnung {
      *
      * @param empf
      */
-    public Rechnung(Kunde empf) {
+    public Rechnung(PremiumKunde empf) {
         this.rechnungsempfänger = empf;
         this.rechnungsnummer    = Rechnung.berechneNaechsteRechnungsnummer();
     }
@@ -51,7 +54,7 @@ public class Rechnung {
         return rechnungsempfänger;
     }
 
-    public void setRechnungsempfänger(Kunde rechnungsempfänger) {
+    public void setRechnungsempfänger(PremiumKunde rechnungsempfänger) {
         this.rechnungsempfänger = rechnungsempfänger;
     }
 
@@ -66,7 +69,7 @@ public class Rechnung {
     void gebeAus() {
         System.out.println("An:");
         System.out.println(this.rechnungsempfänger.getName());
-        System.out.println(this.rechnungsempfänger.getAnschrift());
+        System.out.println(this.rechnungsempfänger.adresse);
         System.out.print("Rechnungsnummer: ");
         System.out.println(getRechnungsnummer());
         System.out.print("Netto : ");
@@ -124,7 +127,7 @@ public class Rechnung {
         return summe * (1 - this.getRabatt());
     }
 
-    void aendereRechnungsempfaengetr(Kunde neuerEmpfaenger) {
+    void aendereRechnungsempfaengetr(PremiumKunde neuerEmpfaenger) {
         this.rechnungsempfänger = neuerEmpfaenger;
     }
 }

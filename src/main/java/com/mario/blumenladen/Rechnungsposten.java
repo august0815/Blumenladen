@@ -6,6 +6,10 @@
  */
 package com.mario.blumenladen;
 
+//~--- non-JDK imports --------------------------------------------------------
+
+import com.mario.blumenladen.waren.Artikel;
+
 /**
  *
  * @author mario

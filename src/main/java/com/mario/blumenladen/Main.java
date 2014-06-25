@@ -6,6 +6,12 @@
  */
 package com.mario.blumenladen;
 
+//~--- non-JDK imports --------------------------------------------------------
+
+import com.mario.blumenladen.kunde.Kunde;
+import com.mario.blumenladen.kunde.PremiumKunde;
+import com.mario.blumenladen.waren.Artikel;
+
 /**
  *
  * @author mario
@@ -17,14 +23,20 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        Kunde             k = new Kunde("Anton Meier", "TEERTAL 8, \n9999 Nirgendwo");
+        String       anschrift = "TEERTAL 8, \n9999 Nirgendwo";
+        PremiumKunde k;
+        Angestellte  an = new Angestellte("Hugo Egon");
+
+        k         = new PremiumKunde("Anton Meier");
+        k.adresse = anschrift;
+
         Rechnung          r = new Rechnung(k);
         Artikel           a, b, c;
         Rechnungsposten[] rp = new Rechnungsposten[10];
 
-        a = new Artikel(1001, "Blume", 5, 0.19);
-        b = new Artikel(1002, "Topf", 10, 0.19);
-        c = new Artikel(1003, "Erde", 15, 0.19);
+        a = new Artikel(1001, 5, "Blume");
+        b = new Artikel(1002, 10, "Topf");
+        c = new Artikel(1003, 20, "Erde");
         r.fuegePostenHinzu(new Rechnungsposten(10, a));
         r.fuegePostenHinzu(new Rechnungsposten(20, b));
         r.fuegePostenHinzu(new Rechnungsposten(30, c));
@@ -32,6 +44,7 @@ public class Main {
         r.rabatt             = 0.10;
 
         // r.mehrwertsteuer     = 0.19;
+        System.out.println("Es bediente Sie  : " + an.getName());
         r.gebeAus();
     }
 }
