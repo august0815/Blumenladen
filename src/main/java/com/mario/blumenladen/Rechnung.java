@@ -27,7 +27,7 @@ import java.util.List;
 public class Rechnung {
     private static int    naechsteRechnungsnummer     = 1000;
     static final double   STANDART_MEHRWERTSTEUERSATZ = 0.19;
-    List<Rechnungsposten> posten                      = new LinkedList<Rechnungsposten>();
+    List<Rechnungsposten> posten                      = new LinkedList<>();
     int                   postenAnzahl                = 0;
     private double        betrag                      = 200;
     double                rabatt;
@@ -69,6 +69,10 @@ public class Rechnung {
         return rechnungsempfänger;
     }
 
+    /**
+     *
+     * @param rechnungsempfänger
+     */
     public void setRechnungsempfänger(PremiumKunde rechnungsempfänger) {
         this.rechnungsempfänger = rechnungsempfänger;
     }
@@ -165,8 +169,16 @@ public class Rechnung {
         this.rechnungsempfänger = neuerEmpfaenger;
     }
 
+    /**
+     *
+     * @param i
+     */
     public void legeBetragFest(int i) {}
 
+    /**
+     *
+     * @return
+     */
     public int bestimmeRabatt() {
         if (rechnungsempfänger.getIstPremiumkunde()) {
             if (betrag >= 200) {
@@ -183,6 +195,10 @@ public class Rechnung {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int bestimmeBetragInCent() {
         return 0;
     }
