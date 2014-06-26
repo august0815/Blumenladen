@@ -25,6 +25,10 @@ public class Angestellte extends Person {
         super(name);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getName() {
         return super.getName();    // To change body of generated methods, choose Tools | Templates.

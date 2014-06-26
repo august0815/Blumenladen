@@ -31,6 +31,9 @@ public class Rechnungstest extends junit.framework.TestCase {
      */
     public Rechnungstest() {}
 
+    /**
+     * TODO
+     */
     public void setUp() {
         Kunde        k  = new Kunde("Anna Meier");
         PremiumKunde pk = new PremiumKunde("Ina Kunze");
@@ -39,18 +42,31 @@ public class Rechnungstest extends junit.framework.TestCase {
         rPremium = new Rechnung(pk);
     }
 
+    /**
+     * TODO
+     */
     public void testeRabattBeiNeuerRechnung() {
         assertEquals("Rabatt bei 0 Euro und normaler Kundin " + "fehlerhaft.", 0, r.bestimmeRabatt());
     }
 
+    /**
+     * TODO
+     */
     public void testeRabattBeiNeuerRechnungPremium() {
         assertEquals("Rabatt bei 0 Euro und Premiunmkundin " + "fehlerhaft.", 5, rPremium.bestimmeRabatt());
     }
 
+    /**
+     * TODO
+     */
     @AfterClass
     public static void tearDownClass() {}
 
+    /**
+     * TODO
+     */
     @After
+    @Override
     public void tearDown() {}
 
     // TODO add test methods here.

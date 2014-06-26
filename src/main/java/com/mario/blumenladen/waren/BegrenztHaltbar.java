@@ -11,6 +11,11 @@ package com.mario.blumenladen.waren;
  * @author mario
  */
 public interface BegrenztHaltbar {
+
+    /**
+     *
+     * @return
+     */
     Datum getHaltbarkeit();
 }
 

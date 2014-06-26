@@ -41,10 +41,18 @@ public class Kunde extends Person {
         super(name);
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getIstPremiumkunde() {
         return istPremiumkunde;
     }
 
+    /**
+     *
+     * @param istPremiumkunde
+     */
     public void setIstPremiumkunde(boolean istPremiumkunde) {
         this.istPremiumkunde = istPremiumkunde;
     }

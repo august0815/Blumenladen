@@ -47,6 +47,9 @@ public class Kassenanwendung {
         br = new BufferedReader(new InputStreamReader(System.in));
     }
 
+    /**
+     * TODO 
+     */
     public void ausfuehren() {
         try {
             leseArtikelEin();

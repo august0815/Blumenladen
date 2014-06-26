@@ -43,30 +43,58 @@ public class Artikel {
         this.preis        = preis;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getPreis() {
         return preis;
     }
 
+    /**
+     *
+     * @param preis
+     */
     public void setPreis(double preis) {
         this.preis = preis;
     }
 
+    /**
+     *
+     * @param beschreibung
+     */
     public void setBeschreibung(String beschreibung) {
         this.beschreibung = beschreibung;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getBeschreibung() {
         return beschreibung;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getArtikelnr() {
         return artikelnr;
     }
 
+    /**
+     *
+     * @param artikelnr
+     */
     public void setArtikelnr(long artikelnr) {
         this.artikelnr = artikelnr;
     }
 
+    /**
+     *
+     * @param mehrwertsteuer
+     */
     public void setMehrwertsteuer(double mehrwertsteuer) {
         if (mehrwertsteuer < 0) {
             throw new IllegalArgumentException("MwST<0 " + mehrwertsteuer);
@@ -75,10 +103,18 @@ public class Artikel {
         this.mehrwertsteuer = mehrwertsteuer;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getMehrwertsteuer() {
         return mehrwertsteuer;
     }
 
+    /**
+     * TODO
+     *
+     */
     public void getInformation() {
         System.out.println("Artikel ");
         System.out.println(this.getBeschreibung());

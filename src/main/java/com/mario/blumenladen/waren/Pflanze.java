@@ -40,14 +40,23 @@ public class Pflanze extends Artikel {
         this.lagertemperatur = lagertemperatur;
     }
 
+    /**
+     *
+     * @param lagertemperatur
+     */
     public void setLagertemperatur(double lagertemperatur) {
         this.lagertemperatur = lagertemperatur;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getLagertemperatur() {
         return lagertemperatur;
     }
 
+    @Override
     public void getInformation() {
         super.getInformation();
         System.out.println("Lagertemperatur ");

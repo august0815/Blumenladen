@@ -16,6 +16,11 @@ import com.mario.blumenladen.kunde.Kunde;
  * @author         Enter your name here...
  */
 public class EinfacherRechnungstest {
+
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Kunde    k = new Kunde("Anna Meier");
         Rechnung r = new Rechnung(k);
