@@ -35,8 +35,9 @@ public class Artikel {
      * @param artikelnr
      * @param preis
      * @param beschreibung
+     * @param mwst
      */
-    public Artikel(long artikelnr, double preis, String beschreibung) {
+    public Artikel(long artikelnr, String beschreibung, double preis, double mwst) {
         this.artikelnr    = artikelnr;
         this.beschreibung = beschreibung;
         this.preis        = preis;

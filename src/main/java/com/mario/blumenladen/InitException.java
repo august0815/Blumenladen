@@ -10,9 +10,16 @@ package com.mario.blumenladen;
  *
  * @author mario
  */
-public class Main {
-    public static void main(String[] args) {
-        new Kassenanwendung().ausfuehren();
+public class InitException extends Exception {
+
+    /**
+     * Constructs ...
+     *
+     *
+     * @param message
+     */
+    public InitException(String message) {
+        super(message);
     }
 }
 

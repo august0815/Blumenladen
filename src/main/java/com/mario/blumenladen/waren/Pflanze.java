@@ -36,7 +36,7 @@ public class Pflanze extends Artikel {
      * @param lagertemperatur
      */
     public Pflanze(long artikelnr, double preis, String beschreibung, double lagertemperatur) {
-        super(artikelnr, preis, beschreibung);
+        super(artikelnr, beschreibung, preis, 0.19);
         this.lagertemperatur = lagertemperatur;
     }
 

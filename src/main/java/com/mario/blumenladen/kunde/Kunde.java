@@ -30,6 +30,17 @@ public class Kunde extends Person {
         super(name);
     }
 
+    /**
+     * Constructs ...
+     *
+     *
+     * @param name
+     * @param anschrift
+     */
+    public Kunde(String name, String anschrift) {
+        super(name);
+    }
+
     public boolean getIstPremiumkunde() {
         return istPremiumkunde;
     }

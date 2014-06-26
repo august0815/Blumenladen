@@ -13,6 +13,10 @@ import com.mario.blumenladen.kunde.PremiumKunde;
 
 //~--- JDK imports ------------------------------------------------------------
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,6 +43,10 @@ public class Rechnung {
     public Rechnung(Kunde empf) {
         this.rechnungsempfänger = empf;
         this.rechnungsnummer    = Rechnung.berechneNaechsteRechnungsnummer();
+    }
+
+    static void setNaechsteRechnungsnummer(int nummer) {
+        naechsteRechnungsnummer = nummer;
     }
 
     static int berechneNaechsteRechnungsnummer() {
@@ -74,26 +82,45 @@ public class Rechnung {
     }
 
     void gebeAus() {
-        System.out.println("An:");
-        System.out.println(this.rechnungsempfänger.getName());
+        gebeAus(new PrintWriter(System.out));
+    }
 
-        // System.out.println(this.rechnungsempfänger.adresse);
-        System.out.print("Rechnungsnummer: ");
-        System.out.println(getRechnungsnummer());
-        System.out.println("");
-        System.out.println("Artikel : ");
+    private void gebeAus(PrintWriter pw) {
+        pw.println("Rechnung Nr. " + this.rechnungsnummer);
+        pw.println("An:");
+        pw.println(this.getRechnungsempfänger().getName());
+
+        // pw.println(this.getRechnungsempfänger().
+        // getAnschrift());
+        pw.println("Artikel:");
 
         for (Rechnungsposten rp : posten) {
-            System.out.println(rp.anzahl + " x Nr " + rp.getArtikel().getArtikelnr() + "   "
-                               + rp.getArtikel().getBeschreibung());
+            pw.print(rp.getAnzahl() + " x Nr. " + rp.getArtikel().getArtikelnr());
+            pw.println(" " + rp.getArtikel().getBeschreibung());
         }
 
-        System.out.print("Netto : ");
-        System.out.println(berechneNettopreis());
-        System.out.print("MwSt: ");
-        System.out.println(berechneMehrwertsteuer());
-        System.out.print("Brutto: ");
-        System.out.println(berechneBruttopreis());
+        pw.println("Netto: " + this.berechneNettopreis());
+        pw.println("MwSt: " + this.berechneMehrwertsteuer());
+        pw.println("Brutto: " + this.berechneBruttopreis());
+        pw.flush();
+    }
+
+    void speichern() {
+        File f = new File(rechnungsnummer + ".txt");
+
+        if (f.exists()) {
+            System.out.println("Rechnungsdatei existiert schon, Rechnung wird deshalb nicht gespeichert.");
+        }
+
+        PrintWriter pw;
+
+        try {
+            pw = new PrintWriter(f);
+            gebeAus(pw);
+            pw.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Rechnungsdatei konnte nicht gefunden werden, Rechnung wird deshalb nicht gespeichert.");
+        }
     }
 
     void setRabatt(final double neuerRabatt) throws UngueltigeRabattAusnahme {
