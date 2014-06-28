@@ -6,6 +6,10 @@
  */
 package com.mario.blumenladen;
 
+//~--- non-JDK imports --------------------------------------------------------
+
+import com.mario.blumenladen.NewJFrame;
+
 /**
  *
  * @author mario
@@ -17,7 +21,11 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        new Kassenanwendung().ausfuehren();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new NewJFrame().setVisible(true);
+            }
+        });
     }
 }
 

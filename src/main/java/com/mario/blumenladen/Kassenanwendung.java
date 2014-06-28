@@ -48,7 +48,7 @@ public class Kassenanwendung {
     }
 
     /**
-     * TODO 
+     * TODO
      */
     public void ausfuehren() {
         try {
@@ -68,8 +68,7 @@ public class Kassenanwendung {
             System.err.println(e.getMessage());
         }
 
-        starteKassenmenu();
-
+        // starteKassenmenu();
         try {
             speichereRechnungsnummer();
         } catch (InitException e) {
@@ -177,8 +176,8 @@ public class Kassenanwendung {
     }
 
     private void starteKassenmenu() {
-        zeigeKassenmenu();
 
+        // zeigeKassenmenu();
         try {
             String eingabe = br.readLine();
 
@@ -201,12 +200,58 @@ public class Kassenanwendung {
     }
 
     private void zeigeKassenmenu() {
-        System.out.println("Willkommen:");
+        setAusgabe("TEST");
         System.out.println("1 - Neue Rechnung");
         System.out.println("2 - Beenden");
     }
 
     private void erzeugeNeueRechnung() {
+        Kunde empfaenger;
+
+        try {
+            empfaenger = erzeugeNeuenKunden();
+        } catch (CreationException e) {
+            System.err.println("Fehler bei der Erzeugung eines neuen Kunden.");
+            System.err.println(e.getMessage());
+            System.err.println("Die Rechnungserstellung wird abgebrochen");
+
+            return;
+        }
+
+        Rechnung r = new Rechnung(empfaenger);
+        String   eingabe;
+
+        try {
+            rechnungspostenHinzufuegen(r);
+            r.gebeAus();
+        } catch (CreationException e) {
+            System.err.println("Fehler beim Hinzufügen der Rechnungsposten");
+            System.err.println(e.getMessage());
+            System.err.println("Die Rechnungserstellung wird abgebrochen.");
+        }
+
+        System.out.println("Wollen Sie die Rechnung speichern? (ja/nein)");
+
+        while (true) {
+            try {
+                eingabe = br.readLine();
+            } catch (IOException e) {
+                System.err.println("Fehler bei der Ein- und Ausgabe. Rechnung " + "kann nicht gespeichert werden");
+
+                return;
+            }
+
+            if ("ja".equals(eingabe)) {
+                r.speichern();
+
+                break;
+            } else if (!"nein".equals(eingabe)) {
+                System.out.println("Bitte antworten Sie mit ja oder nein.");
+            }
+        }
+    }
+
+    private void erzeugeNeueRechnung1() {
         Kunde empfaenger;
 
         try {
