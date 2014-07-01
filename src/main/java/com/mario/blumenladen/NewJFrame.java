@@ -1,6 +1,16 @@
 package com.mario.blumenladen;
 
 import com.mario.blumenladen.Kassenanwendung;
+import com.mario.blumenladen.waren.Artikel;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 
@@ -16,12 +26,51 @@ import javax.swing.JTextArea;
  * @author mario
  */
 public class NewJFrame extends javax.swing.JFrame {
+Connection con;
+Statement stmt;
+ResultSet rs;
+    Kassenanwendung k;
+    
+
+
+public void DoConnect( ) throws ClassNotFoundException {
+    try {
+    //Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+    String host = "jdbc:derby://localhost:1527/artikel";
+
+    String uName = "app";
+    String uPass= "app";
+    con =DriverManager.getConnection(host,uName,uPass);
+    } catch (SQLException ex) {
+        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+    }
+      try {
+        stmt=con.createStatement();
+        String sql="SELECT * FROM artikel";
+        rs=stmt.executeQuery(sql);
+        rs.next();
+       // int id_col=rs.getInt("ID");
+        //int nr=rs.getInt("PREIS");
+        //String be=rs.getString("BESCHREIBUNG");
+        // AusgabeMonitor.setText(id_col+" "+nr+" "+be);
+          
+         //AusgabeMonitor.setText(ausgabe);
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+}
+
 
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+    public NewJFrame() throws ClassNotFoundException, InitException {
         initComponents();
+        k = new Kassenanwendung();
+        k.leseArtikelEin();
+        DoConnect();
     }
 
     /**
@@ -60,6 +109,13 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jTextField1.setText("0");
+        jTextField1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTextField1InputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
 
         jTextField2.setText("Blauer Blumentopf");
 
@@ -141,8 +197,6 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        Übernehmen.getAccessibleContext().setAccessibleName("Übernehmen");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,57 +218,33 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void neueRechnungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_neueRechnungActionPerformed
-        Kassenanwendung k;
-     //   k = new Kassenanwendung();
-        AusgabeMonitor.setText("TEST");
+      
+    AusgabeMonitor.setText("TEST  ");
+             
+        
+  
     }//GEN-LAST:event_neueRechnungActionPerformed
 
     private void jAuswahlArtikelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAuswahlArtikelActionPerformed
-        // TODO add your handling code here:
+    String temp1 = (String) jAuswahlArtikel.getSelectedItem();
+    long temp2 = Long.valueOf( temp1).longValue();
+    Map<Long, Artikel> a = k.getArtikeldaten();
+    Artikel aa = a.get(temp2);
+       jTextField3.setText(String.valueOf(aa.getPreis()));
+       jTextField2.setText(aa.getBeschreibung());
     }//GEN-LAST:event_jAuswahlArtikelActionPerformed
 
     private void ÜbernehmenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ÜbernehmenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ÜbernehmenActionPerformed
+
+    private void jTextField1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextField1InputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1InputMethodTextChanged
     public void setAusgabe(String ausgabe) {
-         AusgabeMonitor.setText(ausgabe);
+        
+         
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewJFrame().setVisible(true);
-            }
-        });
-    }
-
-
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

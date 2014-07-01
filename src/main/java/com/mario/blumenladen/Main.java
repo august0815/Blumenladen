@@ -10,6 +10,11 @@ package com.mario.blumenladen;
 
 import com.mario.blumenladen.NewJFrame;
 
+//~--- JDK imports ------------------------------------------------------------
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author mario
@@ -23,7 +28,11 @@ public class Main {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame().setVisible(true);
+                try {
+                    new NewJFrame().setVisible(true);
+                } catch (ClassNotFoundException | InitException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

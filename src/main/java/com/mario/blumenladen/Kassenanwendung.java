@@ -77,7 +77,7 @@ public class Kassenanwendung {
         }
     }
 
-    private void leseArtikelEin() throws InitException {
+    public void leseArtikelEin() throws InitException {
         this.artikeldaten = new HashMap<Long, Artikel>();
 
         File f = new File(artikeldatei);
@@ -105,6 +105,10 @@ public class Kassenanwendung {
         }
     }
 
+    public Map<Long, Artikel> getArtikeldaten() {
+        return artikeldaten;
+    }
+
     private Artikel erzeugeArtikel(String zeile) {
         Scanner sc           = new Scanner(new StringReader(zeile));
         long    nummer       = sc.nextLong();
@@ -121,6 +125,8 @@ public class Kassenanwendung {
         while (sc.hasNext()) {
             beschreibung += " " + sc.next();
         }
+
+        System.out.println(nummer + beschreibung + preis);
 
         return new Artikel(nummer, beschreibung, preis, mwst);
     }
@@ -200,7 +206,8 @@ public class Kassenanwendung {
     }
 
     private void zeigeKassenmenu() {
-        setAusgabe("TEST");
+
+        // setAusgabe("TEST");
         System.out.println("1 - Neue Rechnung");
         System.out.println("2 - Beenden");
     }
