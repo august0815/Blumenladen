@@ -73,6 +73,7 @@
                                       <Component id="neueRechnung" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="Ende" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jButton3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jNeuerArtikel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
@@ -94,6 +95,8 @@
                           <Component id="Ende" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jNeuerArtikel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane1" min="-2" pref="193" max="-2" attributes="0"/>
                   </Group>
@@ -192,6 +195,14 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="jNeuerArtikel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="NeuerArtikel"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jNeuerArtikelActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

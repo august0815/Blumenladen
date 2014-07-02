@@ -94,6 +94,7 @@ public void DoConnect( ) throws ClassNotFoundException {
         jAuswahlArtikel = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         AusgabeMonitor = new javax.swing.JTextArea();
+        jNeuerArtikel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -141,6 +142,13 @@ public void DoConnect( ) throws ClassNotFoundException {
         AusgabeMonitor.setRows(5);
         jScrollPane1.setViewportView(AusgabeMonitor);
 
+        jNeuerArtikel.setText("NeuerArtikel");
+        jNeuerArtikel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNeuerArtikelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -169,7 +177,8 @@ public void DoConnect( ) throws ClassNotFoundException {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(neueRechnung)
                                     .addComponent(Ende)
-                                    .addComponent(jButton3))
+                                    .addComponent(jButton3)
+                                    .addComponent(jNeuerArtikel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -183,7 +192,9 @@ public void DoConnect( ) throws ClassNotFoundException {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Ende)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3))
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jNeuerArtikel))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -241,6 +252,11 @@ public void DoConnect( ) throws ClassNotFoundException {
     private void jTextField1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextField1InputMethodTextChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1InputMethodTextChanged
+
+    private void jNeuerArtikelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNeuerArtikelActionPerformed
+       NewJArtikel na= new NewJArtikel();
+       na.setVisible(true);
+    }//GEN-LAST:event_jNeuerArtikelActionPerformed
     public void setAusgabe(String ausgabe) {
         
          
@@ -253,6 +269,7 @@ public void DoConnect( ) throws ClassNotFoundException {
     private javax.swing.JComboBox jAuswahlArtikel;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jNeuerArtikel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
