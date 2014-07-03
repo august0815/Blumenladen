@@ -1,12 +1,30 @@
 Blumenladen
 ===========
 
-Übungen zum Implementierung von Klassen und Methoden
+Übung zur Implementierung von Klassen und Methoden.
+
 Einführung in OOP , Fernuni Hagen SS2014 
 
-Fallbeispiel Blumenladen
 
-Verwendet werden
+### Fallbeispiel Blumenladen mit Gui Erweiterung ###
+
+
+TODO
+----
+
+* Dokumentieren der Klassen
+* Testen mit JUnit
+* Autostart von Derby
+* MySql anbinden
+* Code cleanup 
+* Überwachung der Eingaben
+* _
+* _
+
+
+
+
+Es wurde folgendes Verwendet
  
 Java
 ----
@@ -19,7 +37,7 @@ versinon IDE 8.0 mit Erweiterungen
 git
 ---
 zweig master  :
-Kurs 3 Kapitel 18 Objekte
+GUI 
 
 meaven
 ------
@@ -29,7 +47,7 @@ Plant UML
 ---------
 Model erzeugt mit Referse Engeneer
 
-SQL
+SQL - Derby
 ---
 Tutorial von  http://www.homeandlearn.co.uk/java/databases_and_java_forms.html
 verwendet wird JDBC Derby
