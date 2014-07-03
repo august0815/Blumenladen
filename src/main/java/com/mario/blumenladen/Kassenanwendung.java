@@ -77,7 +77,11 @@ public class Kassenanwendung {
         }
     }
 
-    public void leseArtikelEin() throws InitException {
+    /**
+     *
+     * @throws InitException
+     */
+    public Map<Long, Artikel> leseArtikelEin() throws InitException {
         this.artikeldaten = new HashMap<Long, Artikel>();
 
         File f = new File(artikeldatei);
@@ -103,6 +107,8 @@ public class Kassenanwendung {
         } catch (IOException e) {
             throw new InitException("Fehler beim Einlesen der Artikeldaten.");
         }
+
+        return artikeldaten;
     }
 
     public Map<Long, Artikel> getArtikeldaten() {
@@ -131,7 +137,7 @@ public class Kassenanwendung {
         return new Artikel(nummer, beschreibung, preis, mwst);
     }
 
-    private void initialisiereRechnungsnummer() throws InitException {
+    public void initialisiereRechnungsnummer() throws InitException {
         File f      = new File(rechnungsnummerdatei);
         int  nummer = -1;
 
@@ -158,7 +164,7 @@ public class Kassenanwendung {
         }
     }
 
-    private void speichereRechnungsnummer() throws InitException {
+    public void speichereRechnungsnummer() throws InitException {
         File f = new File(rechnungsnummerdatei);
 
         if (!f.exists()) {

@@ -85,8 +85,27 @@ public class Rechnung {
         return rabatt;
     }
 
-    void gebeAus() {
-        gebeAus(new PrintWriter(System.out));
+    String gebeAus() {
+        String s = "";
+
+        s += ("Rechnung Nr. " + this.rechnungsnummer + "\n");
+        s += ("An:" + "\n");
+        s += (this.getRechnungsempfänger().getName() + "\n");
+
+        // s +=(this.getRechnungsempfänger().
+        // getAnschrift());
+        s += ("Artikel:" + "\n");
+
+        for (Rechnungsposten rp : posten) {
+            s += (rp.getAnzahl() + " x Nr. " + rp.getArtikel().getArtikelnr());
+            s += (" " + rp.getArtikel().getBeschreibung() + "\n");
+        }
+
+        s += ("Netto: " + this.berechneNettopreis() + "\n");
+        s += ("MwSt: " + this.berechneMehrwertsteuer() + "\n");
+        s += ("Brutto: " + this.berechneBruttopreis() + "\n");
+
+        return s;
     }
 
     private void gebeAus(PrintWriter pw) {

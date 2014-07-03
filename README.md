@@ -29,7 +29,15 @@ Plant UML
 ---------
 Model erzeugt mit Referse Engeneer
 
+SQL
+---
+Tutorial von  http://www.homeandlearn.co.uk/java/databases_and_java_forms.html
+verwendet wird JDBC Derby
+
+GUI
+---
+Entwickelt mit netbeans 
 
 Jindent
 -------
-Grundeinstellungen
+Grundeinstellungen Testversion

@@ -18,30 +18,28 @@ import javax.swing.JOptionPane;
  *
  * @author mario
  */
-public class NewJArtikel extends javax.swing.JFrame {
+public class NewJArtikel extends javax.swing.JDialog {
 
 Connection con;
 Statement stmt;
 ResultSet rs;
-public void DoConnect( ) {
-    try {
         String host = "jdbc:derby://localhost:1527/artikel";
         
         String uName = "app";
         String uPass= "app";
+int curRow = 0;
+public void DoConnect( ) {
+    try {
+
         con =DriverManager.getConnection(host,uName,uPass);
-        try {
-            stmt= con.createStatement( ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        } catch (SQLException ex) {
-            Logger.getLogger(NewJArtikel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
+        stmt= con.createStatement( ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+       
         String sql="SELECT * FROM artikel";
-        try {
+       
             rs= stmt.executeQuery(sql);
-        } catch (SQLException ex) {
-            Logger.getLogger(NewJArtikel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        rs.next();
+     
+        rs.first();
         int  id_num=0;
         String preis="";
         String besch="";
@@ -50,10 +48,12 @@ public void DoConnect( ) {
         preis = rs.getString("PREIS");
         besch = rs.getString("BESCHREIBUNG");
         String mwst="0.19";
-        textNummer.setText(id);
-        TextPreis.setText(preis);
-        TextBeschreibung.setText(besch);
+        textNummer.setText(id.trim());
+        TextPreis.setText(preis.trim());
+        TextBeschreibung.setText(besch.trim());
         TextMwst.setText(mwst);
+        jSave.setEnabled( false );
+        jCancle.setEnabled( false );
         
     } catch (SQLException ex) {
         Logger.getLogger(NewJArtikel.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,7 +63,8 @@ public void DoConnect( ) {
     /**
      * Creates new form NewJArtikel
      */
-    public NewJArtikel() {
+    public NewJArtikel(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         DoConnect();
     }
@@ -82,16 +83,25 @@ public void DoConnect( ) {
         TextPreis = new javax.swing.JTextField();
         TextBeschreibung = new javax.swing.JTextField();
         TextMwst = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jFirstButton = new javax.swing.JButton();
+        jPrevButton = new javax.swing.JButton();
+        jNextButton = new javax.swing.JButton();
+        jLastButton = new javax.swing.JButton();
+        jUpdateRecord = new javax.swing.JButton();
+        jDeleteRecord = new javax.swing.JButton();
+        jNewRecord = new javax.swing.JButton();
+        jSave = new javax.swing.JButton();
+        jCancle = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(640, 480));
+        setResizable(false);
 
         textNummer.setText("textNummer");
 
         TextPreis.setText("textPreis");
+        TextPreis.setMinimumSize(new java.awt.Dimension(30, 100));
         TextPreis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextPreisActionPerformed(evt);
@@ -107,43 +117,112 @@ public void DoConnect( ) {
 
         TextMwst.setText("textMwst");
 
-        jButton1.setText("First");
-
-        jButton2.setText("Prew");
-
-        jButton3.setText("Next");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jFirstButton.setText("First");
+        jFirstButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jFirstButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Last");
+        jPrevButton.setText("Prew");
+        jPrevButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPrevButtonActionPerformed(evt);
+            }
+        });
+
+        jNextButton.setText("Next");
+        jNextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNextButtonActionPerformed(evt);
+            }
+        });
+
+        jLastButton.setText("Last");
+        jLastButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLastButtonActionPerformed(evt);
+            }
+        });
+
+        jUpdateRecord.setText("Update Record");
+        jUpdateRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jUpdateRecordActionPerformed(evt);
+            }
+        });
+
+        jDeleteRecord.setText("Delete Record");
+        jDeleteRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDeleteRecordActionPerformed(evt);
+            }
+        });
+
+        jNewRecord.setText("New Record");
+        jNewRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNewRecordActionPerformed(evt);
+            }
+        });
+
+        jSave.setText("Save New Record");
+        jSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSaveActionPerformed(evt);
+            }
+        });
+
+        jCancle.setText("Cancle New Record");
+        jCancle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCancleActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("%");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(textNummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(TextPreis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(TextBeschreibung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TextMwst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(textNummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TextPreis, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TextBeschreibung, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TextMwst, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jUpdateRecord)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jDeleteRecord))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jFirstButton)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jPrevButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jNextButton)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLastButton)
+                                    .addComponent(jNewRecord)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(57, 57, 57)
+                        .addComponent(jSave)
+                        .addGap(57, 57, 57)
+                        .addComponent(jCancle)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,14 +232,24 @@ public void DoConnect( ) {
                     .addComponent(textNummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TextPreis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TextBeschreibung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TextMwst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextMwst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addContainerGap(189, Short.MAX_VALUE))
+                    .addComponent(jFirstButton)
+                    .addComponent(jPrevButton)
+                    .addComponent(jNextButton)
+                    .addComponent(jLastButton))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jDeleteRecord)
+                    .addComponent(jUpdateRecord)
+                    .addComponent(jNewRecord))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSave)
+                    .addComponent(jCancle))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -173,7 +262,9 @@ public void DoConnect( ) {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,10 +278,10 @@ public void DoConnect( ) {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextBeschreibungActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jNextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNextButtonActionPerformed
         try {
             if ( rs.next( ) ) {
-                rs.next();
+              //  rs.next();
                 int  id_num=0;
                 String preis="";
                 String besch="";
@@ -199,9 +290,9 @@ public void DoConnect( ) {
                 preis = rs.getString("PREIS");
                 besch = rs.getString("BESCHREIBUNG");
                 String mwst="0.19";
-                textNummer.setText(id);
-                TextPreis.setText(preis);
-                TextBeschreibung.setText(besch);
+                textNummer.setText(id.trim());
+                TextPreis.setText(preis.trim());
+                TextBeschreibung.setText(besch.trim());
                 TextMwst.setText(mwst);
             }
             else {
@@ -212,52 +303,261 @@ public void DoConnect( ) {
             catch (SQLException err) {
                 JOptionPane.showMessageDialog(NewJArtikel.this, err.getMessage());
             }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jNextButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void jPrevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPrevButtonActionPerformed
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+            if ( rs.previous()) {
+               // rs.previous();
+                int  id_num=0;
+                String preis="";
+                String besch="";
+                id_num = rs.getInt("NUMMER");
+                String id=Integer.toString(id_num);
+                preis = rs.getString("PREIS");
+                besch = rs.getString("BESCHREIBUNG");
+                String mwst="0.19";
+                textNummer.setText(id.trim());
+                TextPreis.setText(preis.trim());
+                TextBeschreibung.setText(besch.trim());
+                TextMwst.setText(mwst);
+            }
+            else {
+                rs.next( );
+                JOptionPane.showMessageDialog(NewJArtikel.this, "Beginn of File");
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJArtikel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJArtikel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJArtikel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJArtikel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewJArtikel().setVisible(true);
+            catch (SQLException err) {
+                JOptionPane.showMessageDialog(NewJArtikel.this, err.getMessage());
             }
-        });
+    }//GEN-LAST:event_jPrevButtonActionPerformed
+
+    private void jLastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLastButtonActionPerformed
+        try {
+                rs.last();
+                int  id_num=0;
+                String preis="";
+                String besch="";
+                id_num = rs.getInt("NUMMER");
+                String id=Integer.toString(id_num);
+                preis = rs.getString("PREIS");
+                besch = rs.getString("BESCHREIBUNG");
+                String mwst="0.19";
+                textNummer.setText(id.trim());
+                TextPreis.setText(preis.trim());
+                TextBeschreibung.setText(besch.trim());
+                TextMwst.setText(mwst);
+          
+            }
+            catch (SQLException err) {
+                JOptionPane.showMessageDialog(NewJArtikel.this, err.getMessage());
+            }
+    }//GEN-LAST:event_jLastButtonActionPerformed
+
+    private void jFirstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFirstButtonActionPerformed
+       try {
+                rs.first();
+                int  id_num=0;
+                String preis="";
+                String besch="";
+                id_num = rs.getInt("NUMMER");
+                String id=Integer.toString(id_num);
+                preis = rs.getString("PREIS");
+                besch = rs.getString("BESCHREIBUNG");
+                String mwst="0.19";
+                textNummer.setText(id.trim());
+                TextPreis.setText(preis.trim());
+                TextBeschreibung.setText(besch.trim());
+                TextMwst.setText(mwst);
+          
+            }
+            catch (SQLException err) {
+                JOptionPane.showMessageDialog(NewJArtikel.this, err.getMessage());
+            }
+    }//GEN-LAST:event_jFirstButtonActionPerformed
+
+    private void jNewRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNewRecordActionPerformed
+    try {
+        jDeleteRecord.setEnabled( false );
+        jFirstButton.setEnabled( false ) ;
+        jLastButton.setEnabled( false );
+        jNewRecord.setEnabled( false );
+        jUpdateRecord.setEnabled( false );
+        jNextButton.setEnabled( false );
+        jPrevButton.setEnabled( false );
+
+        jSave.setEnabled( true );
+        jCancle.setEnabled( true );
+        curRow = rs.getRow();
+        textNummer.setText("");
+        TextPreis.setText("");
+        TextBeschreibung.setText("");
+        TextMwst.setText("");
+    } catch (SQLException ex) {
+        Logger.getLogger(NewJArtikel.class.getName()).log(Level.SEVERE, null, ex);
     }
+        
+          
+    }//GEN-LAST:event_jNewRecordActionPerformed
+
+    private void jUpdateRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateRecordActionPerformed
+            try {
+                String ID="";
+                String preis="";
+                String besch="";
+                ID=textNummer.getText().trim();
+                preis=TextPreis.getText().trim();
+                besch=TextBeschreibung.getText().trim();
+                String mwst="0.19";
+                int newID = Integer.parseInt(ID );
+            
+                rs.updateInt("NUMMER",newID);
+                rs.updateString("PREIS", preis);
+                rs.updateString("BESCHREIBUNG",besch);
+                rs.updateRow();
+                JOptionPane.showMessageDialog(NewJArtikel.this, "Updated");
+            }
+                    catch (SQLException err) {
+                    System.out.println(err.getMessage() );
+            }
+    }//GEN-LAST:event_jUpdateRecordActionPerformed
+
+    private void jCancleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancleActionPerformed
+    try {
+        rs.absolute( curRow );
+        jDeleteRecord.setEnabled( true );
+        jFirstButton.setEnabled( true ) ;
+        jLastButton.setEnabled( true );
+        jNewRecord.setEnabled( true );
+        jUpdateRecord.setEnabled( true );
+        jNextButton.setEnabled( true );
+        jPrevButton.setEnabled( true );
+
+        jSave.setEnabled( false );
+        jCancle.setEnabled( false );
+         int  id_num=0;
+                String preis="";
+                String besch="";
+                id_num = rs.getInt("NUMMER");
+                String id=Integer.toString(id_num);
+                preis = rs.getString("PREIS");
+                besch = rs.getString("BESCHREIBUNG");
+                String mwst="0.19";
+                textNummer.setText(id.trim());
+                TextPreis.setText(preis.trim());
+                TextBeschreibung.setText(besch.trim());
+                TextMwst.setText(mwst);
+    } catch (SQLException ex) {
+        Logger.getLogger(NewJArtikel.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_jCancleActionPerformed
+
+    private void jSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveActionPerformed
+             
+    try {
+        jDeleteRecord.setEnabled( true );
+        jFirstButton.setEnabled( true ) ;
+        jLastButton.setEnabled( true );
+        jNewRecord.setEnabled( true );
+        jUpdateRecord.setEnabled( true );
+        jNextButton.setEnabled( true );
+        jPrevButton.setEnabled( true );
+
+        jSave.setEnabled( false );
+        jCancle.setEnabled( false );
+        rs.moveToInsertRow();
+           String ID="";
+                String preis="";
+                String besch="";
+                ID=textNummer.getText();
+                preis=TextPreis.getText();
+                besch=TextBeschreibung.getText();
+                String mwst="0.19";
+                int newID = Integer.parseInt(ID );
+            
+                rs.updateInt("NUMMER",newID);
+                rs.updateString("PREIS", preis);
+                rs.updateString("BESCHREIBUNG",besch);
+                rs.insertRow();
+                stmt.close( );
+                rs.close( );
+                con =DriverManager.getConnection(host,uName,uPass);
+       
+        stmt= con.createStatement( ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+       
+        String sql="SELECT * FROM artikel";
+       
+            rs= stmt.executeQuery(sql);
+     
+        rs.next();
+        int  id_num=0;
+        
+        id_num = rs.getInt("NUMMER");
+        String id=Integer.toString(id_num);
+        preis = rs.getString("PREIS");
+        besch = rs.getString("BESCHREIBUNG");
+        //String mwst="0.19";
+        textNummer.setText(id.trim());
+        TextPreis.setText(preis.trim());
+        TextBeschreibung.setText(besch.trim());
+        TextMwst.setText(mwst);
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(NewJArtikel.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+    }//GEN-LAST:event_jSaveActionPerformed
+
+    private void jDeleteRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteRecordActionPerformed
+        
+    try {
+        rs.deleteRow( );
+        stmt.close( );
+                rs.close( );
+                con =DriverManager.getConnection(host,uName,uPass);
+       
+        stmt= con.createStatement( ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+       
+        String sql="SELECT * FROM artikel";
+       
+            rs= stmt.executeQuery(sql);
+     
+        rs.next();
+        int  id_num=0;
+         String ID="";
+                String preis="";
+                String besch="";
+        id_num = rs.getInt("NUMMER");
+        String id=Integer.toString(id_num);
+        preis = rs.getString("PREIS");
+        besch = rs.getString("BESCHREIBUNG");
+        String mwst="0.19";
+        textNummer.setText(id.trim());
+        TextPreis.setText(preis.trim());
+        TextBeschreibung.setText(besch.trim());
+        TextMwst.setText(mwst);
+        
+    } catch (SQLException ex) {
+        Logger.getLogger(NewJArtikel.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_jDeleteRecordActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TextBeschreibung;
     private javax.swing.JTextField TextMwst;
     private javax.swing.JTextField TextPreis;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jCancle;
+    private javax.swing.JButton jDeleteRecord;
+    private javax.swing.JButton jFirstButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jLastButton;
+    private javax.swing.JButton jNewRecord;
+    private javax.swing.JButton jNextButton;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jPrevButton;
+    private javax.swing.JButton jSave;
+    private javax.swing.JButton jUpdateRecord;
     private javax.swing.JTextField textNummer;
     // End of variables declaration//GEN-END:variables
 }
