@@ -14,8 +14,8 @@ TODO
 
 * Dokumentieren der Klassen
 * Testen mit JUnit
-* Autostart von Derby
-* MySql anbinden
+* ~~Autostart von Derby~~ mysql wird verwendet
+* ~~MySql anbinden~~
 * Code cleanup 
 * Überwachung der Eingaben
 * _

@@ -38,7 +38,7 @@ Map<Long, Artikel>  artikeldaten;
 
 public void DoConnect( ) throws ClassNotFoundException {
     try {
-    //Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+    
     String host = "jdbc:derby://localhost:1527/artikel";
 
     String uName = "app";
