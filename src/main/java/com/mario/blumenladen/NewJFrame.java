@@ -73,9 +73,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
     public void DoConnect() throws ClassNotFoundException {
         try {
-            String host  = "jdbc:derby://localhost:1527/artikel";
-            String uName = "app";
-            String uPass = "app";
+            String host  = "jdbc:mysql://localhost:3306/artikel";
+            String uName = "artikel";
+            String uPass = "123456";
 
             con = DriverManager.getConnection(host, uName, uPass);
         } catch (SQLException ex) {
