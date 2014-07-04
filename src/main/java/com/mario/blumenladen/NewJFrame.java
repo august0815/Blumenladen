@@ -39,10 +39,10 @@ Map<Long, Artikel>  artikeldaten;
 public void DoConnect( ) throws ClassNotFoundException {
     try {
     //Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-    String host = "jdbc:derby://localhost:1527/artikel";
+    String host = "jdbc:mysql://localhost:3306/artikel";
 
-    String uName = "app";
-    String uPass= "app";
+    String uName = "artikel";
+    String uPass= "123456";
     con =DriverManager.getConnection(host,uName,uPass);
     } catch (SQLException ex) {
         Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);

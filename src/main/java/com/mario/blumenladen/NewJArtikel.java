@@ -23,10 +23,10 @@ public class NewJArtikel extends javax.swing.JDialog {
 Connection con;
 Statement stmt;
 ResultSet rs;
-        String host = "jdbc:derby://localhost:1527/artikel";
+        String host = "jdbc:mysql://localhost:3306/artikel";
         
-        String uName = "app";
-        String uPass= "app";
+        String uName = "artikel";
+        String uPass= "123456";
 int curRow = 0;
 public void DoConnect( ) {
     try {
