@@ -45,12 +45,16 @@ Grundeinstellung nichts besonderes
 
 Plant UML
 ---------
-Model erzeugt mit Referse Engeneer
+Model erzeugt mit "Referse Engeneer"
 
 SQL - Derby
 ---
 Tutorial von  http://www.homeandlearn.co.uk/java/databases_and_java_forms.html
 verwendet wird JDBC Derby
+
+MYSQL
+----
+die Beispiel Datenbank in mysql installiert
 
 GUI
 ---
