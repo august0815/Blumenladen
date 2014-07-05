@@ -12,6 +12,7 @@
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>com.github.livesense</groupId>
             <artifactId>org.liveSense.jdbc.mysql</artifactId>
@@ -22,24 +23,62 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+        <main.class>com.mario.blumenladen.Main</main.class>
     </properties>
     <build>
         <plugins>
+            
             <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.0</version>
-            <configuration>
-                <source>1.7</source>
-                <target>1.7</target>
+		<groupId>com.googlecode.mavennatives</groupId>
+		<artifactId>maven-nativedependencies-plugin</artifactId>
+		<version>0.0.7</version>
+		<executions>
+                    <execution>
+			<id>unpacknatives</id>
+			<phase>generate-resources</phase>
+			<goals>
+                            <goal>copy</goal>
+			</goals>
+                    </execution>
+		</executions>
+            </plugin>
+                 <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
                 <archive>
                     <manifest>
-                        <mainClass>${main.class}</mainClass>
                         <addClasspath>true</addClasspath>
-                        <classpathPrefix>lib/</classpathPrefix>
+                       <mainClass>com.mario.blumenladen.Main</mainClass>
                     </manifest>
                 </archive>
             </configuration>
+      
+      </plugin>
+            <plugin>
+		<artifactId>maven-assembly-plugin</artifactId>
+		<version>2.4</version>
+		<executions>
+                    <execution>
+			<id>bundle-release</id>
+			<phase>package</phase>
+			<goals>
+                        	<goal>single</goal>
+			</goals>
+			<configuration>
+                            <descriptors>
+				<descriptor>${project.basedir}/src/main/assembly/assembly.xml</descriptor>
+                            </descriptors>
+			</configuration>
+                    </execution>
+		</executions>
             </plugin>
-        </plugins>
+       
+       
+    </plugins>
+
     </build>
 </project>

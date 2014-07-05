@@ -25,8 +25,8 @@ Statement stmt;
 ResultSet rs;
             String host  = "jdbc:mysql://localhost:3306/artikel";
             
-            String uName = "artikel";
-            String uPass = "123456";
+            String uName = "app";
+            String uPass = "app";
 int curRow = 0;
 public void DoConnect( ) {
     try {

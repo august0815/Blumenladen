@@ -26,9 +26,16 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringReader;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class description
@@ -52,16 +59,6 @@ public class Kassenanwendung {
      */
     public void ausfuehren() {
         try {
-            leseArtikelEin();
-        } catch (InitException e) {
-            System.err.println("Fehler beim Laden der Artikeldaten:");
-            System.err.println(e.getMessage());
-            System.err.println("Das Programm wird beendet");
-
-            return;
-        }
-
-        try {
             initialisiereRechnungsnummer();
         } catch (InitException e) {
             System.err.println("Fehler bei der Initialisierung der Rechnungsnummer:");
@@ -81,31 +78,25 @@ public class Kassenanwendung {
      *
      * @throws InitException
      */
-    public Map<Long, Artikel> leseArtikelEin() throws InitException {
-        this.artikeldaten = new HashMap<Long, Artikel>();
-
-        File f = new File(artikeldatei);
-
+    public Map<Long, Artikel> leseArtikelEin(Connection con) throws InitException {
         try {
-            BufferedReader br = new BufferedReader(new FileReader(f));
+            Statement stmt;
+            ResultSet rs;
+            Artikel   a = null;
 
-            try {
-                String zeile = br.readLine();
+            this.artikeldaten = new HashMap<Long, Artikel>();
+            stmt              = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-                while (zeile != null) {
-                    Artikel a = erzeugeArtikel(zeile);
+            String sql = "SELECT * FROM artikel";
 
-                    artikeldaten.put(a.getArtikelnr(), a);
-                    zeile = br.readLine();
-                }
-            } finally {
-                br.close();
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                a = erzeugeArtikel(rs);
+                artikeldaten.put(a.getArtikelnr(), a);
             }
-        } catch (FileNotFoundException e) {
-            throw new InitException("Die Datei " + artikeldatei + " mit den Artikeldaten "
-                                    + "konnte nicht gefunden werden.");
-        } catch (IOException e) {
-            throw new InitException("Fehler beim Einlesen der Artikeldaten.");
+        } catch (SQLException ex) {
+            Logger.getLogger(Kassenanwendung.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return artikeldaten;
@@ -115,24 +106,19 @@ public class Kassenanwendung {
         return artikeldaten;
     }
 
-    private Artikel erzeugeArtikel(String zeile) {
-        Scanner sc           = new Scanner(new StringReader(zeile));
-        long    nummer       = sc.nextLong();
-        double  preis        = sc.nextDouble();
-        double  mwst         = sc.nextDouble();
-        String  beschreibung = "";
+    private Artikel erzeugeArtikel(ResultSet rs) {
+        long   nummer       = 0;
+        double preis        = 0;
+        double mwst         = 0.19;
+        String beschreibung = "";
 
-        if (sc.hasNext()) {
-            beschreibung = sc.next();
+        try {
+            nummer       = rs.getInt("NUMMER");
+            preis        = Double.parseDouble(rs.getString("PREIS"));
+            beschreibung = rs.getString("BESCHREIBUNG");
+        } catch (SQLException ex) {
+            Logger.getLogger(Kassenanwendung.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        // falls die Beschreibung Leerzeichen enthaelt
-        // alle Zeichenketten bis zum Ende der Zeile einlesen
-        while (sc.hasNext()) {
-            beschreibung += " " + sc.next();
-        }
-
-        System.out.println(nummer + beschreibung + preis);
 
         return new Artikel(nummer, beschreibung, preis, mwst);
     }
