@@ -1,16 +1,40 @@
-Blumenladen
-===========
+# Blumenladen
+
 
 Übung zur Implementierung von Klassen und Methoden.
 
 Einführung in OOP , Fernuni Hagen SS2014 
 
 
-### Fallbeispiel Blumenladen mit Gui Erweiterung ###
+## Fallbeispiel Blumenladen mit Gui Erweiterung
+
+###Beschreibung
+
+Klasse ***Kunde*** :
+
+Unterscheidung: Normaler Kunde , Premiumkunde(Adress eingabe möglich Rabattstaffel). 
+Kunden werden nicht gespeichert und müssen immer neu eingegeben werden.  
+  
+Klasse ***Artikel***:  
+  
+Werden in mysql gespeichert 
+*TODO* 
+ 
+Klasse ***Rechung***:   
+*TODO*
+ 
+
+## Bedienung
+*TODO*
+  
+##Compile
+
+>in netbeans möglich 
+>
 
 
-TODO
-----
+## TODO
+
 
 * Dokumentieren der Klassen
 * Testen mit JUnit
@@ -18,7 +42,7 @@ TODO
 * ~~MySql anbinden~~
 * Code cleanup 
 * Überwachung der Eingaben
-* _
+* mvn package
 * _
 
 
@@ -26,36 +50,39 @@ TODO
 
 Es wurde folgendes Verwendet
  
-Java
-----
+###Java
+
 ab Java 7
 
-Netbeans
---------
+###Netbeans
+
 versinon IDE 8.0 mit Erweiterungen
 
-git
----
+###git
 zweig master  :
 GUI 
 
-meaven
-------
+###maven
+
 Grundeinstellung nichts besonderes
 
-Plant UML
----------
-Model erzeugt mit Referse Engeneer
+###Plant UML
 
-SQL - Derby
----
+Model erzeugt mit "Referse Engeneer"
+
+###SQL - Derby
+
 Tutorial von  http://www.homeandlearn.co.uk/java/databases_and_java_forms.html
 verwendet wird JDBC Derby
 
-GUI
----
+###MYSQL
+
+die Beispiel Datenbank in mysql installiert
+
+###GUI
+
 Entwickelt mit netbeans 
 
-Jindent
--------
+###Jindent
+
 Grundeinstellungen Testversion
