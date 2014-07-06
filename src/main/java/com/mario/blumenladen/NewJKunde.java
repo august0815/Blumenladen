@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 public class NewJKunde extends javax.swing.JDialog {
     Kunde kunde ;
     NewJFrame Frame;
+    boolean premium=false;
     /**
      * Creates new form NewJKunde
      */
@@ -23,6 +24,8 @@ public class NewJKunde extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         Frame=aThis;
+        jTextField3.setEnabled(false);
+        jTextField4.setEnabled(false);
     
     }
 
@@ -56,6 +59,11 @@ public class NewJKunde extends javax.swing.JDialog {
         });
 
         jCheckBox1.setText("Premiumkunde");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Übernehmen");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -114,12 +122,27 @@ public class NewJKunde extends javax.swing.JDialog {
       String name =jTextField1.getText()+" "+jTextField2.getText()+"\n";
       String anschrift=jTextField3.getText()+"\n"+jTextField4.getText();
        Frame.kunde = new Kunde(name, anschrift);
+       if (premium){
+           Frame.kunde.setIstPremiumkunde(premium);
+       }
        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+       if (!premium){
+          premium=true;
+               jTextField3.setEnabled(true);
+        jTextField4.setEnabled(true);
+       }else {
+           premium=false;
+         jTextField3.setEnabled(false);
+        jTextField4.setEnabled(false);
+       }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     public Kunde getKunde() {
         return kunde;

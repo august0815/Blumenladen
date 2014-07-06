@@ -1,0 +1,9 @@
+Rechnung Nr. 1013
+An:
+Max  Muster
+
+Artikel:
+10 x Nr. 126 Blume
+Netto: 10.0
+MwSt: 1.9
+Brutto: 11.9

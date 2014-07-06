@@ -12,21 +12,25 @@ Einführung in OOP , Fernuni Hagen SS2014
 
 Klasse ***Kunde*** :
 
- Unterscheidung: Normaler Kunde , Premiumkunde(Adress eingabe möglich Rabattstaffel). 
+Unterscheidung: Normaler Kunde , Premiumkunde(Adress eingabe möglich Rabattstaffel). 
 Kunden werden nicht gespeichert und müssen immer neu eingegeben werden.  
   
 Klasse ***Artikel***:  
   
-Werden in mysql gespeichert, 
-Klasse ***Rechung***:  
-Klasse ***Artikel***:  
-Klasse ***Artikel***:
+Werden in mysql gespeichert 
+*TODO* 
+ 
+Klasse ***Rechung***:   
+*TODO*
+ 
+
 ## Bedienung
+*TODO*
   
 ##Compile
 
->mvn package  
->mvn site
+>in netbeans möglich 
+>
 
 
 ## TODO
@@ -38,7 +42,7 @@ Klasse ***Artikel***:
 * ~~MySql anbinden~~
 * Code cleanup 
 * Überwachung der Eingaben
-* _
+* mvn package
 * _
 
 

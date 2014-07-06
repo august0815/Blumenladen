@@ -272,6 +272,14 @@ public class NewJFrame extends javax.swing.JFrame {
         gebeRechnungaus();
         r = new Rechnung(kunde);
 
+        if (kunde.getIstPremiumkunde()) {
+            try {
+                r.setRabatt(.10);
+            } catch (UngueltigeRabattAusnahme ex) {
+                Logger.getLogger(Kassenanwendung.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
         try {
             k.speichereRechnungsnummer();
         } catch (InitException ex) {
@@ -338,7 +346,11 @@ public class NewJFrame extends javax.swing.JFrame {
         if (r != null) {
             ausgabe += r.gebeAus();
         } else {
-            ausgabe = "Rechnung \n" + kunde.getName() + "\n\n";
+            ausgabe = "Rechnung \n" + kunde.getName() + "\n";
+
+            if (kunde.getIstPremiumkunde()) {
+                ausgabe += (kunde.getAnschrift() + "\n\n");
+            }
         }
 
         AusgabeMonitor.setText(ausgabe);

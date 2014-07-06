@@ -92,8 +92,10 @@ public class Rechnung {
         s += ("An:" + "\n");
         s += (this.getRechnungsempfänger().getName() + "\n");
 
-        // s +=(this.getRechnungsempfänger().
-        // getAnschrift());
+        if (this.getRechnungsempfänger().getIstPremiumkunde()) {
+            s += (this.getRechnungsempfänger().getAnschrift() + "\n\n");
+        }
+
         s += ("Artikel:" + "\n");
 
         for (Rechnungsposten rp : posten) {
@@ -113,8 +115,10 @@ public class Rechnung {
         pw.println("An:");
         pw.println(this.getRechnungsempfänger().getName());
 
-        // pw.println(this.getRechnungsempfänger().
-        // getAnschrift());
+        if (this.getRechnungsempfänger().getIstPremiumkunde()) {
+            pw.println(this.getRechnungsempfänger().getAnschrift() + "\n\n");
+        }
+
         pw.println("Artikel:");
 
         for (Rechnungsposten rp : posten) {
@@ -151,6 +155,7 @@ public class Rechnung {
             throw new UngueltigeRabattAusnahme(neuerRabatt);
         }
 
+        System.out.println("Set Rabatt " + rabatt);
         rabatt = neuerRabatt;
 
         // TODO Fehlerausgabe

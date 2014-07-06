@@ -204,6 +204,7 @@ public class Kassenanwendung {
         System.out.println("2 - Beenden");
     }
 
+    @Deprecated
     private void erzeugeNeueRechnung() {
         Kunde empfaenger;
 
@@ -218,7 +219,16 @@ public class Kassenanwendung {
         }
 
         Rechnung r = new Rechnung(empfaenger);
-        String   eingabe;
+
+        if (empfaenger.getIstPremiumkunde()) {
+            try {
+                r.setRabatt(.10);
+            } catch (UngueltigeRabattAusnahme ex) {
+                Logger.getLogger(Kassenanwendung.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        String eingabe;
 
         try {
             rechnungspostenHinzufuegen(r);
@@ -250,6 +260,7 @@ public class Kassenanwendung {
         }
     }
 
+    @Deprecated
     private void erzeugeNeueRechnung1() {
         Kunde empfaenger;
 
@@ -264,7 +275,16 @@ public class Kassenanwendung {
         }
 
         Rechnung r = new Rechnung(empfaenger);
-        String   eingabe;
+
+        if (empfaenger.getIstPremiumkunde()) {
+            try {
+                r.setRabatt(.10);
+            } catch (UngueltigeRabattAusnahme ex) {
+                Logger.getLogger(Kassenanwendung.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        String eingabe;
 
         try {
             rechnungspostenHinzufuegen(r);

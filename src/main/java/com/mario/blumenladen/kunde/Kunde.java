@@ -19,6 +19,7 @@ import com.mario.blumenladen.Person;
  */
 public class Kunde extends Person {
     boolean istPremiumkunde;
+    String  anschrift;
 
     /**
      * Constructs ...
@@ -39,6 +40,7 @@ public class Kunde extends Person {
      */
     public Kunde(String name, String anschrift) {
         super(name);
+        this.anschrift = anschrift;
     }
 
     /**
@@ -55,6 +57,10 @@ public class Kunde extends Person {
      */
     public void setIstPremiumkunde(boolean istPremiumkunde) {
         this.istPremiumkunde = istPremiumkunde;
+    }
+
+    public String getAnschrift() {
+        return anschrift;
     }
 }
 
