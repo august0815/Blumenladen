@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+import java.text.DecimalFormat;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -103,9 +105,9 @@ public class Rechnung {
             s += (" " + rp.getArtikel().getBeschreibung() + "\n");
         }
 
-        s += ("Netto: " + this.berechneNettopreis() + "\n");
-        s += ("MwSt: " + this.berechneMehrwertsteuer() + "\n");
-        s += ("Brutto: " + this.berechneBruttopreis() + "\n");
+        s += ("Netto: " + new DecimalFormat("#.## €").format(this.berechneNettopreis()) + "\n");
+        s += ("MwSt: " + new DecimalFormat("#.## €").format(this.berechneMehrwertsteuer()) + "\n");
+        s += ("Brutto: " + new DecimalFormat("#.## €").format(this.berechneBruttopreis()) + "\n");
 
         return s;
     }
@@ -126,9 +128,9 @@ public class Rechnung {
             pw.println(" " + rp.getArtikel().getBeschreibung());
         }
 
-        pw.println("Netto: " + this.berechneNettopreis());
-        pw.println("MwSt: " + this.berechneMehrwertsteuer());
-        pw.println("Brutto: " + this.berechneBruttopreis());
+        pw.println("Netto: " + new DecimalFormat("#.## €").format(this.berechneNettopreis()));
+        pw.println("MwSt: " + new DecimalFormat("#.## €").format(this.berechneMehrwertsteuer()));
+        pw.println("Brutto: " + new DecimalFormat("#.## €").format(this.berechneBruttopreis()));
         pw.flush();
     }
 

@@ -54,6 +54,8 @@ public class Kassenanwendung {
         br = new BufferedReader(new InputStreamReader(System.in));
     }
 
+    @Deprecated
+
     /**
      * TODO
      */
@@ -316,6 +318,7 @@ public class Kassenanwendung {
         }
     }
 
+    @Deprecated
     private void rechnungspostenHinzufuegen(Rechnung r) throws CreationException {
         String eingabe;
 
@@ -385,6 +388,7 @@ public class Kassenanwendung {
         return this.artikeldaten.get(artikelnummer);
     }
 
+    @Deprecated
     private Kunde erzeugeNeuenKunden() throws CreationException {
         try {
             System.out.println("Geben Sie bitte den Namen des Kunden ein:");
