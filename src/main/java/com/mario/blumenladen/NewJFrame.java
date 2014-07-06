@@ -346,7 +346,7 @@ public class NewJFrame extends javax.swing.JFrame {
         if (r != null) {
             ausgabe += r.gebeAus();
         } else {
-            ausgabe = "Rechnung \n" + kunde.getName() + "\n";
+            ausgabe = "Rechnung \n" + kunde.getName();
 
             if (kunde.getIstPremiumkunde()) {
                 ausgabe += (kunde.getAnschrift() + "\n\n");
